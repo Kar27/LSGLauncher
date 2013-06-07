@@ -13,6 +13,7 @@ Public Class Setings
             My.Settings.gtasaPath = Environment.SpecialFolder.CommonProgramFiles & "\Rockstar Games\GTA San Andreas"
         End If
         TextBox1.Text = My.Settings.gtasaPath
+        My.Settings.Save()
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -25,6 +26,7 @@ Public Class Setings
             My.Settings.gtasaPath = picker.SelectedPath & ""
         End If
         TextBox1.Text = My.Settings.gtasaPath
+        My.Settings.Save()
     End Sub
 
     Private Sub Setings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
