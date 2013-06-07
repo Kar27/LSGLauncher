@@ -25,13 +25,14 @@ Partial Class Form1
         Me.Button1 = New System.Windows.Forms.Button()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.NustatymaiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.PagalbaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PraneštiBugToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.ProgrmosKodasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -59,16 +60,9 @@ Partial Class Form1
         Me.NustatymaiToolStripMenuItem.Size = New System.Drawing.Size(80, 20)
         Me.NustatymaiToolStripMenuItem.Text = "Nustatymai"
         '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(239, 40)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox1.TabIndex = 2
-        '
         'PagalbaToolStripMenuItem
         '
-        Me.PagalbaToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PraneštiBugToolStripMenuItem})
+        Me.PagalbaToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PraneštiBugToolStripMenuItem, Me.ProgrmosKodasToolStripMenuItem})
         Me.PagalbaToolStripMenuItem.Name = "PagalbaToolStripMenuItem"
         Me.PagalbaToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
         Me.PagalbaToolStripMenuItem.Text = "Pagalba"
@@ -76,8 +70,15 @@ Partial Class Form1
         'PraneštiBugToolStripMenuItem
         '
         Me.PraneštiBugToolStripMenuItem.Name = "PraneštiBugToolStripMenuItem"
-        Me.PraneštiBugToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.PraneštiBugToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
         Me.PraneštiBugToolStripMenuItem.Text = "Pranešti ""Bug"""
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(239, 40)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox1.TabIndex = 2
         '
         'TextBox2
         '
@@ -112,6 +113,12 @@ Partial Class Form1
         Me.Label2.TabIndex = 6
         Me.Label2.Text = "IP   :     Port"
         '
+        'ProgrmosKodasToolStripMenuItem
+        '
+        Me.ProgrmosKodasToolStripMenuItem.Name = "ProgrmosKodasToolStripMenuItem"
+        Me.ProgrmosKodasToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
+        Me.ProgrmosKodasToolStripMenuItem.Text = "Progrmos Kodas..."
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -143,5 +150,6 @@ Partial Class Form1
     Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents ProgrmosKodasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

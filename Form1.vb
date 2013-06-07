@@ -62,4 +62,8 @@ Public Class Form1
     Private Sub PraneštiBugToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PraneštiBugToolStripMenuItem.Click
         Process.Start("https://docs.google.com/forms/d/1hWA-x8cLZgHsZDfDIf7rFXIvawctdAa31H9xf9tGPTk/viewform")
     End Sub
+
+    Private Sub ProgrmosKodasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProgrmosKodasToolStripMenuItem.Click
+        Process.Start("https://github.com/Kar27/LSGLauncher")
+    End Sub
 End Class
