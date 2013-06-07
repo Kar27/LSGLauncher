@@ -32,23 +32,27 @@ Public Class Form1
     End Sub
     Dim WithEvents gta_sa As Process
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        If My.Settings.gtasaPath = Nothing Then 
-            MsgBox("Nustatymuose nustatykite GTA:SA kelia.", MsgBoxStyle.Critical, "Dėmesio")
-            Exit Sub
-        ElseIf Not File.Exists(My.Settings.gtasaPath & "\gta_sa.exe") Then
-            MsgBox("Netinkamas GTA:SA kelias.", MsgBoxStyle.Critical, "Dėmesio")
-            Exit Sub
-        End If
-        If TextBox1.Text.Length = 0 Then
-            MsgBox("Negali būti paliktas tuščias ""Username"" laukas." & vbNewLine & "Žaidimas nepasileis.", MsgBoxStyle.Information, "Informacija")
-            Exit Sub
-        End If
-        My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\SAMP", "PlayerName", TextBox1.Text)
-        gta_sa.StartInfo = New ProcessStartInfo(My.Settings.gtasaPath & "\gta_sa.exe", "-c -h localhost -p 7777") 'Pakrauna i darbine atminti paleidimo komanda
-        File.Copy(My.Settings.gtasaPath & "\samp.dll", My.Settings.gtasaPath & "\samp.asi") 'Parengia SAMP mod
-        gta_sa.Start() ' Paleidžia samp
-        gta_sa.EnableRaisingEvents = True ' leidžia aptikti kada buna uždarytas samp'as
-        AddHandler gta_sa.Exited, AddressOf UnLoadSampAsiFile
+        Try
+            If My.Settings.gtasaPath = Nothing Then
+                MsgBox("Nustatymuose nustatykite GTA:SA kelia.", MsgBoxStyle.Critical, "Dėmesio")
+                Exit Sub
+            ElseIf Not File.Exists(My.Settings.gtasaPath & "\gta_sa.exe") Then
+                MsgBox("Netinkamas GTA:SA kelias.", MsgBoxStyle.Critical, "Dėmesio")
+                Exit Sub
+            End If
+            If TextBox1.Text.Length = 0 Then
+                MsgBox("Negali būti paliktas tuščias ""Username"" laukas." & vbNewLine & "Žaidimas nepasileis.", MsgBoxStyle.Information, "Informacija")
+                Exit Sub
+            End If
+            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\SAMP", "PlayerName", TextBox1.Text)
+            gta_sa.StartInfo = New ProcessStartInfo(My.Settings.gtasaPath & "\gta_sa.exe", "-c -h " & TextBox2.Text & " -p " & TextBox3.Text) 'Pakrauna i darbine atminti paleidimo komanda
+            File.Copy(My.Settings.gtasaPath & "\samp.dll", My.Settings.gtasaPath & "\samp.asi") 'Parengia SAMP mod
+            gta_sa.Start() ' Paleidžia samp
+            gta_sa.EnableRaisingEvents = True ' leidžia aptikti kada buna uždarytas samp'as
+            AddHandler gta_sa.Exited, AddressOf UnLoadSampAsiFile
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Exception")
+        End Try
     End Sub
     Sub UnLoadSampAsiFile()
         gta_sa.WaitForExit()
