@@ -29,13 +29,14 @@ Partial Class Form1
         Me.NustatymaiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PagalbaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PraneštiBugToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ProgrmosKodasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.ProgrmosKodasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
+        Me.FixPermisionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -65,7 +66,7 @@ Partial Class Form1
         '
         'PagalbaToolStripMenuItem
         '
-        Me.PagalbaToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PraneštiBugToolStripMenuItem, Me.ProgrmosKodasToolStripMenuItem})
+        Me.PagalbaToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PraneštiBugToolStripMenuItem, Me.ProgrmosKodasToolStripMenuItem, Me.FixPermisionsToolStripMenuItem})
         Me.PagalbaToolStripMenuItem.Name = "PagalbaToolStripMenuItem"
         Me.PagalbaToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
         Me.PagalbaToolStripMenuItem.Text = "Pagalba"
@@ -75,6 +76,12 @@ Partial Class Form1
         Me.PraneštiBugToolStripMenuItem.Name = "PraneštiBugToolStripMenuItem"
         Me.PraneštiBugToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
         Me.PraneštiBugToolStripMenuItem.Text = "Pranešti ""Bug"""
+        '
+        'ProgrmosKodasToolStripMenuItem
+        '
+        Me.ProgrmosKodasToolStripMenuItem.Name = "ProgrmosKodasToolStripMenuItem"
+        Me.ProgrmosKodasToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
+        Me.ProgrmosKodasToolStripMenuItem.Text = "Progrmos Kodas..."
         '
         'TextBox1
         '
@@ -116,17 +123,17 @@ Partial Class Form1
         Me.Label2.TabIndex = 6
         Me.Label2.Text = "IP   :     Port"
         '
-        'ProgrmosKodasToolStripMenuItem
-        '
-        Me.ProgrmosKodasToolStripMenuItem.Name = "ProgrmosKodasToolStripMenuItem"
-        Me.ProgrmosKodasToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
-        Me.ProgrmosKodasToolStripMenuItem.Text = "Progrmos Kodas..."
-        '
         'NotifyIcon1
         '
         Me.NotifyIcon1.Icon = CType(resources.GetObject("NotifyIcon1.Icon"), System.Drawing.Icon)
         Me.NotifyIcon1.Text = "NotifyIcon1"
         Me.NotifyIcon1.Visible = True
+        '
+        'FixPermisionsToolStripMenuItem
+        '
+        Me.FixPermisionsToolStripMenuItem.Name = "FixPermisionsToolStripMenuItem"
+        Me.FixPermisionsToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
+        Me.FixPermisionsToolStripMenuItem.Text = "Fix Permisions"
         '
         'Form1
         '
@@ -161,5 +168,6 @@ Partial Class Form1
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents ProgrmosKodasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents NotifyIcon1 As System.Windows.Forms.NotifyIcon
+    Friend WithEvents FixPermisionsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

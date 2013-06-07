@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.Security.AccessControl
 
 Public Class Form1
 
@@ -15,17 +16,17 @@ Public Class Form1
         If Not Directory.Exists("C:\LsglTemp") Then
             Directory.CreateDirectory("C:\LsglTemp")
         End If
-            If Not My.Settings.cleoExists Then
-                If Not File.Exists(My.Settings.gtasaPath & "\CLEO.asi") Then
-                    Console.WriteLine("No CLEO :(")
-                    Downloader.Download("https://dl.dropboxusercontent.com/u/111217126/CLEO4.exe", "C:\LsglTemp\CLEO4.exe")
+        If Not My.Settings.cleoExists Then
+            If Not File.Exists(My.Settings.gtasaPath & "\CLEO.asi") Then
+                Console.WriteLine("No CLEO :(")
+                Downloader.Download("https://dl.dropboxusercontent.com/u/111217126/CLEO4.exe", "C:\LsglTemp\CLEO4.exe")
                 Process.Start("""C:\\LsglTemp\\CLEO4.exe""", "/S")
-                End If
             End If
-            If Not My.Settings.sampExists Then
-                If Not File.Exists(My.Settings.gtasaPath & "\samp.exe") Then
-                    Console.WriteLine("No samp :(")
-                    Downloader.Download("https://dl.dropboxusercontent.com/u/111217126/samp0.3x.exe", "C:/LsglTemp/samp0.3x.exe")
+        End If
+        If Not My.Settings.sampExists Then
+            If Not File.Exists(My.Settings.gtasaPath & "\samp.exe") Then
+                Console.WriteLine("No samp :(")
+                Downloader.Download("https://dl.dropboxusercontent.com/u/111217126/samp0.3x.exe", "C:/LsglTemp/samp0.3x.exe")
                 Process.Start("""C:\\LsglTemp\\samp0.3x.exe""", "/S")
             End If
         End If
@@ -71,5 +72,18 @@ Public Class Form1
 
     Private Sub NotifyIcon1_Click(sender As Object, e As EventArgs) Handles NotifyIcon1.DoubleClick
         Me.Show()
+    End Sub
+
+    Private Sub FixPermisionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FixPermisionsToolStripMenuItem.Click
+        Try
+            If Not My.Settings.gtasaPath = Nothing Then
+                Dim folderinfo As IO.DirectoryInfo = New IO.DirectoryInfo(My.Settings.gtasaPath & "\")
+                Dim FileAcl As New DirectorySecurity
+                FileAcl.AddAccessRule(New FileSystemAccessRule(My.User.Name, FileSystemRights.FullControl, AccessControlType.Allow))
+                folderinfo.SetAccessControl(FileAcl)
+            End If
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+        End Try
     End Sub
 End Class
