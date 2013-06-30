@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Form1
+Partial Class Main_Old
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -23,20 +23,20 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main_Old))
         Me.Button1 = New System.Windows.Forms.Button()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.NustatymaiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PagalbaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PraneštiBugToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProgrmosKodasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FixPermisionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
-        Me.FixPermisionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -82,6 +82,12 @@ Partial Class Form1
         Me.ProgrmosKodasToolStripMenuItem.Name = "ProgrmosKodasToolStripMenuItem"
         Me.ProgrmosKodasToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
         Me.ProgrmosKodasToolStripMenuItem.Text = "Progrmos Kodas..."
+        '
+        'FixPermisionsToolStripMenuItem
+        '
+        Me.FixPermisionsToolStripMenuItem.Name = "FixPermisionsToolStripMenuItem"
+        Me.FixPermisionsToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
+        Me.FixPermisionsToolStripMenuItem.Text = "Fix Permisions"
         '
         'TextBox1
         '
@@ -129,17 +135,11 @@ Partial Class Form1
         Me.NotifyIcon1.Text = "NotifyIcon1"
         Me.NotifyIcon1.Visible = True
         '
-        'FixPermisionsToolStripMenuItem
-        '
-        Me.FixPermisionsToolStripMenuItem.Name = "FixPermisionsToolStripMenuItem"
-        Me.FixPermisionsToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
-        Me.FixPermisionsToolStripMenuItem.Text = "Fix Permisions"
-        '
-        'Form1
+        'Main_Old
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(460, 78)
+        Me.ClientSize = New System.Drawing.Size(460, 77)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TextBox3)
@@ -148,7 +148,7 @@ Partial Class Form1
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
-        Me.Name = "Form1"
+        Me.Name = "Main_Old"
         Me.Text = "Form1"
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()

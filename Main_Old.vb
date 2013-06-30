@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 Imports System.Security.AccessControl
 
-Public Class Form1
+Public Class Main_Old
 
     Private Sub NustatymaiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NustatymaiToolStripMenuItem.Click
         Setings.ShowDialog()
