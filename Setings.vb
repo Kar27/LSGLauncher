@@ -2,15 +2,12 @@
 Public Class Setings
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        If Not File.Exists(Environment.SpecialFolder.CommonProgramFilesX86 & "\Rockstar Games\GTA San Andreas\gta_sa.exe") Then
-            MsgBox("Jusu kompiuteryje nera ""GTA:SA"" arba yra įrašytas kitur")
-        ElseIf File.Exists(Environment.SpecialFolder.CommonProgramFilesX86 & "\Rockstar Games\GTA San Andreas\gta_sa.exe") Then
-            My.Settings.gtasaPath = Environment.SpecialFolder.CommonProgramFilesX86 & "\Rockstar Games\GTA San Andreas"
-        End If
-        If Not File.Exists(Environment.SpecialFolder.CommonProgramFiles & "\Rockstar Games\GTA San Andreas\gta_sa.exe") Then
-            MsgBox("Jusu kompiuteryje nera ""GTA:SA"" arba yra įrašytas kitur")
-        ElseIf File.Exists(Environment.SpecialFolder.CommonProgramFiles & "\Rockstar Games\GTA San Andreas\gta_sa.exe") Then
-            My.Settings.gtasaPath = Environment.SpecialFolder.CommonProgramFiles & "\Rockstar Games\GTA San Andreas"
+        Dim GtaSaEXEPath As String = My.Computer.Registry.GetValue("HKEY_LOCAL_MACHIME\SOFTWARE\Rockstar Games\GTA San Andreas\Installation", "ExePath", "")
+        Dim GtaSaPath As String = GtaSaEXEPath.Substring(1).Substring(0, GtaSaEXEPath.Length - "\gta_sa.exe""".Length - 1)
+        If Not File.Exists(GtaSaPath & "\gta_sa.exe") Then
+            MsgBox("Jusu kompiuteryje nera ""GTA:SA""")
+        ElseIf File.Exists(GtaSaPath & "\gta_sa.exe") Then
+            My.Settings.gtasaPath = GtaSaPath
         End If
         TextBox1.Text = My.Settings.gtasaPath
         My.Settings.Save()

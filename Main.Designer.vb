@@ -161,6 +161,7 @@ Partial Class Main
         '
         'Timer1
         '
+        Me.Timer1.Interval = 500
         '
         'Main
         '

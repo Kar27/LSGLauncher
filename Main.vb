@@ -22,8 +22,16 @@ Public Class Main
         ComboBox1.Text = "LSG"
         Console.WriteLine(My.Settings.gtasaPath)
         If My.Settings.gtasaPath = Nothing Then ' Viskas žemiau yra skirta samp / cleo / gta patikrai
-            MsgBox("Nustatymuose nustatykite GTA:SA kelia.", MsgBoxStyle.Critical, "Dėmesio")
-            Setings.ShowDialog()
+            Dim GtaSaEXEPath As String = My.Computer.Registry.GetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Rockstar Games\GTA San Andreas\Installation", "ExePath", "lolololoolololol")
+            Dim GtaSaPath As String = GtaSaEXEPath.Substring(1)
+            GtaSaPath = GtaSaPath.Substring(0, GtaSaPath.Length - "\gta_sa.exe""".Length)
+            If Not File.Exists(GtaSaPath & "\gta_sa.exe") Then
+                MsgBox("Jusu kompiuteryje nera ""GTA:SA""")
+            ElseIf File.Exists(GtaSaPath & "\gta_sa.exe") Then
+                My.Settings.gtasaPath = GtaSaPath
+            End If
+            TextBox1.Text = My.Settings.gtasaPath
+            My.Settings.Save()
         End If
         If Not Directory.Exists("C:\LsglTemp") Then
             Directory.CreateDirectory("C:\LsglTemp")
@@ -36,7 +44,7 @@ Public Class Main
         '   End If
         '  End If
         If Not My.Settings.sampExists Then
-            If Not File.Exists(My.Settings.gtasaPath & "\samp.exe") Then
+            If (Not File.Exists(My.Settings.gtasaPath & "\samp.exe")) And (File.Exists(My.Settings.gtasaPath & "\gta_sa.exe")) Then
                 Console.WriteLine("No samp :(")
                 Downloader.Download("https://dl.dropboxusercontent.com/u/111217126/samp0.3x.exe", "C:/LsglTemp/samp0.3x.exe")
                 Process.Start("""C:\\LsglTemp\\samp0.3x.exe""", "/S")
@@ -72,24 +80,20 @@ Public Class Main
         My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\SAMP", "PlayerName", TextBox1.Text)
 
         gta_sa.StartInfo.WorkingDirectory = My.Settings.gtasaPath
-        gta_sa.StartInfo.FileName = My.Settings.gtasaPath & "\gta_sa.exe" 'Pakrauna i darbine atminti paleidimo komanda
-        gta_sa.StartInfo.Arguments = "-c -h " & ServersUtils.Load(servers.Item(FindID(ComboBox1.Text))).Item(1) & " -p " & ServersUtils.Load(servers.Item(FindID(ComboBox1.Text))).Item(2)
-        If Not File.Exists(My.Settings.gtasaPath & "\samp.asi") Then
-            File.Copy(My.Settings.gtasaPath & "\samp.dll", My.Settings.gtasaPath & "\samp.asi") 'Parengia SAMP mod
-        End If
-        While Not FileCompare(My.Settings.gtasaPath & "\samp.dll", My.Settings.gtasaPath & "\samp.asi")
-            System.Threading.Thread.Sleep(25)
+        gta_sa.StartInfo.FileName = My.Settings.gtasaPath & "\samp.exe" 'Pakrauna i darbine atminti paleidimo komanda
+        gta_sa.StartInfo.Arguments = "" & ServersUtils.Load(servers.Item(FindID(ComboBox1.Text))).Item(1) & ":" & ServersUtils.Load(servers.Item(FindID(ComboBox1.Text))).Item(2)
+        'If Not File.Exists(My.Settings.gtasaPath & "\samp.asi") Then
+        ' File.Copy(My.Settings.gtasaPath & "\samp.dll", My.Settings.gtasaPath & "\samp.asi") 'Parengia SAMP mod
+        'End If
+        'While Not FileCompare(My.Settings.gtasaPath & "\samp.dll", My.Settings.gtasaPath & "\samp.asi")
+        'System.Threading.Thread.Sleep(25)
 
-        End While
+        'End While
         Me.Hide()
         NotifyIcon1.ShowBalloonTip(5000, "Informacija", "Paleidžiamas SAMP.", ToolTipIcon.Info)
         gta_sa.Start() ' Paleidžia samp
         gta_sa.EnableRaisingEvents = True ' leidžia aptikti kada buna uždarytas samp'as
-    End Sub
-    Sub UnLoadSampAsiFile() Handles gta_sa.Exited
-        gta_sa.WaitForExit()
-        File.Delete(My.Settings.gtasaPath & "\samp.asi") ' Unloadina samp moda, kad gta single ir papratas samp veiktu tinkamai
-        NotifyIcon1.ShowBalloonTip(5000, "Informacija", "Procesas ""gta_sa.exe"" buvo uždarytas", ToolTipIcon.Info)
+        Threading.Thread.Sleep(3000)
         Timer1.Start()
     End Sub
 
@@ -192,12 +196,16 @@ Public Class Main
         End Select
     End Sub
 
-    Private Sub MenuStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles MenuStrip1.ItemClicked
-
+    Private Sub NotifyIcon1_BalloonTipClicked(sender As Object, e As EventArgs) Handles NotifyIcon1.BalloonTipClicked
+        Me.Show()
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        Me.Show()
-        Timer1.Stop()
+        Dim p() As Process = Process.GetProcessesByName("gta_sa")
+        If p.Count > 0 Then
+        Else
+            NotifyIcon1.ShowBalloonTip(5000, "Informacija", "SAMP buvo uždarytas." & vbNewLine & "Paspaukit Čia Kad Atidaryti Launcheri.", ToolTipIcon.Info)
+            Timer1.Stop()
+        End If
     End Sub
 End Class
