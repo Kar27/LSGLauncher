@@ -9,6 +9,14 @@ Public Class Main
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim LSGNews As New RSSChannel("http://www.lsgyvenimas.lt/index.php?option=com_content&view=category&id=1&format=feed")
+        Dim doctxt As String = "<body bgcolor=""#2F3333""><font size=""2"" face=""Helvetica"" color=""#DEE9ED"">"
+        For Each Arcticle As RSSItem In LSGNews.GetChannelItems()
+            doctxt &= "<font size=""5"">" & Arcticle.Title & "</font><br />" & Arcticle.Description & vbNewLine & "<br />"
+        Next
+        doctxt &= "</font></body>"
+        WebBrowser1.DocumentText = doctxt
+
         If My.Settings.moservers Then
             PridėtiServeriToolStripMenuItem.Visible = True
             PašalintiServerisToolStripMenuItem.Visible = True
