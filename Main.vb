@@ -1,22 +1,26 @@
 ﻿Imports System.IO
 Imports System.Security.AccessControl
+Imports System.Threading
 
 Public Class Main
     Public servers As New System.Collections.Specialized.StringCollection
     Public usernameeee As String
+    Private rss As Thread
     Private Sub NustatymaiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NustatymaiToolStripMenuItem.Click
         Setings.ShowDialog()
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim LSGNews As New RSSChannel("http://www.lsgyvenimas.lt/index.php?option=com_content&view=category&id=1&format=feed")
-        Dim doctxt As String = "<body bgcolor=""#2F3333""><font size=""2"" face=""Helvetica"" color=""#DEE9ED"">"
-        For Each Arcticle As RSSItem In LSGNews.GetChannelItems()
-            doctxt &= "<font size=""5"">" & Arcticle.Title & "</font><br />" & Arcticle.Description & vbNewLine & "<br />"
-        Next
-        doctxt &= "</font></body>"
-        WebBrowser1.DocumentText = doctxt
-
+        'Dim LSGNews As New RSSChannel("http://www.lsgyvenimas.lt/index.php?option=com_content&view=category&id=1&format=feed")
+        'Dim doctxt As String = "<body bgcolor=""#2F3333""><font size=""2"" face=""Helvetica"" color=""#DEE9ED"">"
+        'For Each Arcticle As RSSItem In LSGNews.GetChannelItems()
+        '    doctxt &= "<font size=""5"">" & Arcticle.Title & "</font><br />" & Arcticle.Description & vbNewLine & "<br />"
+        'Next
+        'doctxt &= "</font></body>"
+        'WebBrowser1.DocumentText = doctxt
+        rss = New Thread(AddressOf LoadRSS)
+        rss.IsBackground = True
+        rss.Start()
         If My.Settings.moservers Then
             PridėtiServeriToolStripMenuItem.Visible = True
             PašalintiServerisToolStripMenuItem.Visible = True
@@ -215,5 +219,15 @@ Public Class Main
             NotifyIcon1.ShowBalloonTip(5000, "Informacija", "SAMP buvo uždarytas." & vbNewLine & "Paspaukit Čia Kad Atidaryti Launcheri.", ToolTipIcon.Info)
             Timer1.Stop()
         End If
+    End Sub
+
+    Private Sub LoadRSS()
+        Dim LSGNews As New RSSChannel("http://www.lsgyvenimas.lt/index.php?option=com_content&view=category&id=1&format=feed")
+        Dim doctxt As String = "<body bgcolor=""#2F3333""><font size=""2"" face=""Helvetica"" color=""#DEE9ED"">"
+        For Each Arcticle As RSSItem In LSGNews.GetChannelItems()
+            doctxt &= "<font size=""5"">" & Arcticle.Title & "</font><br />" & Arcticle.Description & vbNewLine & "<br />"
+        Next
+        doctxt &= "</font></body>"
+        WebBrowser1.DocumentText = doctxt
     End Sub
 End Class
