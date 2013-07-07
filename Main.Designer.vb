@@ -23,7 +23,6 @@ Partial Class Main
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main))
         Me.Button1 = New System.Windows.Forms.Button()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.NustatymaiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -35,7 +34,6 @@ Partial Class Main
         Me.PašalintiServerisToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.WebBrowser1 = New System.Windows.Forms.WebBrowser()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -125,12 +123,6 @@ Partial Class Main
         Me.Label2.TabIndex = 6
         Me.Label2.Text = "Vartotojo Vardas:"
         '
-        'NotifyIcon1
-        '
-        Me.NotifyIcon1.Icon = CType(resources.GetObject("NotifyIcon1.Icon"), System.Drawing.Icon)
-        Me.NotifyIcon1.Text = "SAMP Launcher"
-        Me.NotifyIcon1.Visible = True
-        '
         'ComboBox1
         '
         Me.ComboBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -193,7 +185,6 @@ Partial Class Main
     Friend WithEvents PraneštiBugToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents ProgrmosKodasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents NotifyIcon1 As System.Windows.Forms.NotifyIcon
     Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
     Friend WithEvents PridėtiServeriToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents PašalintiServerisToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem

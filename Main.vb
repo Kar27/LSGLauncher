@@ -6,6 +6,8 @@ Public Class Main
     Public servers As New System.Collections.Specialized.StringCollection
     Public usernameeee As String
     Private rss As Thread
+    Private misc As Thread
+    Delegate Sub myMethodDelegate()
     Private Sub NustatymaiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NustatymaiToolStripMenuItem.Click
         Setings.ShowDialog()
     End Sub
@@ -64,7 +66,6 @@ Public Class Main
         End If
         usernameeee = (My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\SAMP", "PlayerName", ""))
         TextBox1.Text = usernameeee
-        NotifyIcon1.Visible = True
         If My.Settings.firtTime Then
             servers = New System.Collections.Specialized.StringCollection
             servers.Add(ServersUtils.Save(ServersUtils.OldFormatToNew(My.Settings.lsgadrres, "LSG")))
@@ -102,7 +103,6 @@ Public Class Main
 
         'End While
         Me.Hide()
-        NotifyIcon1.ShowBalloonTip(5000, "Informacija", "Paleidžiamas SAMP.", ToolTipIcon.Info)
         gta_sa.Start() ' Paleidžia samp
         gta_sa.EnableRaisingEvents = True ' leidžia aptikti kada buna uždarytas samp'as
         Threading.Thread.Sleep(3000)
@@ -117,7 +117,7 @@ Public Class Main
         Process.Start("https://github.com/Kar27/LSGLauncher")
     End Sub
 
-    Private Sub NotifyIcon1_Click(sender As Object, e As EventArgs) Handles NotifyIcon1.DoubleClick
+    Private Sub NotifyIcon1_Click(sender As Object, e As EventArgs)
         Me.Show()
     End Sub
     Private Function FileCompare(ByVal file1 As String, ByVal file2 As String) As Boolean
@@ -208,7 +208,7 @@ Public Class Main
         End Select
     End Sub
 
-    Private Sub NotifyIcon1_BalloonTipClicked(sender As Object, e As EventArgs) Handles NotifyIcon1.BalloonTipClicked
+    Private Sub NotifyIcon1_BalloonTipClicked(sender As Object, e As EventArgs)
         Me.Show()
     End Sub
 
@@ -216,8 +216,12 @@ Public Class Main
         Dim p() As Process = Process.GetProcessesByName("gta_sa")
         If p.Count > 0 Then
         Else
-            NotifyIcon1.ShowBalloonTip(5000, "Informacija", "SAMP buvo uždarytas." & vbNewLine & "Paspaukit Čia Kad Atidaryti Launcheri.", ToolTipIcon.Info)
             Timer1.Stop()
+            If InvokeRequired Then
+                Invoke(New myMethodDelegate(AddressOf ShowMe))
+            Else
+                ShowMe()
+            End If
         End If
     End Sub
 
@@ -229,5 +233,8 @@ Public Class Main
         Next
         doctxt &= "</font></body>"
         WebBrowser1.DocumentText = doctxt
+    End Sub
+    Private Sub ShowMe()
+        Me.Show()
     End Sub
 End Class
